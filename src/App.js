@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Stack } from "@mui/material";
+import { Nav } from "components/molecules/Nav";
+import { MainPage } from "Page/Main";
+import { ThemeProvider } from "styled-components";
+import { useDarkMode } from "hooks/useDarkMode";
+import { lightTheme, darkTheme } from "const/Theme";
+import { GlobalStyles } from "Styles/GlobalStyle";
+import ProviderContextTheme from "context/ThmeProviderContex";
 
 function App() {
+  // const [theme, toggleTheme] = useDarkMode();
+
+  // const themeMode = theme ? lightTheme : darkTheme;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ProviderContextTheme>
+      <GlobalStyles />
+      <Box>
+        <Nav />
+        <Stack>
+          <MainPage />
+        </Stack>
+      </Box>
+    </ProviderContextTheme>
   );
 }
 
