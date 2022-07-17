@@ -16,7 +16,6 @@ export const useApiClientException = () => {
         return navigate(routePathTypes.noMatch, { state: errorMessage });
       case "ERR_NETWORK":
         return navigate(routePathTypes.noMatch, { state: errorMessage });
-        ``;
 
       default:
         return navigate(routePathTypes.noMatch, { state: errorMessage });
