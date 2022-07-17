@@ -11,7 +11,6 @@ export const GridContainer = styled(Grid)`
 `;
 
 export const StyledIconContainer = styled.div`
-  width: 50%;
   margin: 0 auto;
   border-radius: 10px;
   border-color: ${(props) => props.theme.text};
