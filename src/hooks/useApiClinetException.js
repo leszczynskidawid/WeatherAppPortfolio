@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { routePathTypes } from "const/routePathTypes";
 export const useApiClientException = () => {
   const navigate = useNavigate();
   const handleApiClientException = (e) => {
@@ -7,17 +8,18 @@ export const useApiClientException = () => {
 
     switch (status) {
       case "404":
-        return navigate("/nomatch", { state: errorMessage });
+        return navigate(routePathTypes.noMatch, { state: errorMessage });
 
       case "400":
-        return navigate("/nomatch", { state: errorMessage });
+        return navigate(routePathTypes.noMatch, { state: errorMessage });
       case "401":
-        return navigate("/nomatch", { state: errorMessage });
+        return navigate(routePathTypes.noMatch, { state: errorMessage });
       case "ERR_NETWORK":
-        return navigate("/nomatch", { state: errorMessage });
+        return navigate(routePathTypes.noMatch, { state: errorMessage });
+        ``;
 
       default:
-        return navigate("/nomatch", { state: errorMessage });
+        return navigate(routePathTypes.noMatch, { state: errorMessage });
     }
   };
   return { handleApiClientException };
