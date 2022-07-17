@@ -1,21 +1,23 @@
+import { useNavigate } from "react-router-dom";
 export const useApiClientException = () => {
+  const navigate = useNavigate();
   const handleApiClientException = (e) => {
-    console.log("handle", e.response.data.cod);
     let status = e.response.data.cod;
     let errorMessage = e.response.data.message;
 
     switch (status) {
-      case 404:
-        errorMessage = e.message;
+      case "404":
+        return navigate("/nomatch", { state: errorMessage });
 
-        alert(errorMessage);
-        break;
+      case "400":
+        return navigate("/nomatch", { state: errorMessage });
+      case "401":
+        return navigate("/nomatch", { state: errorMessage });
+      case "ERR_NETWORK":
+        return navigate("/nomatch", { state: errorMessage });
 
-      case 400:
-        alert(errorMessage);
-        break;
       default:
-        alert(errorMessage);
+        return navigate("/nomatch", { state: errorMessage });
     }
   };
   return { handleApiClientException };

@@ -1,17 +1,15 @@
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { useThemeContext } from "context/ThmeProviderContex";
 
-export const ToggleSwitch = ({ ...props }) => {
-  const { toggleTheme } = useThemeContext();
+export const ToggleSwitch = ({ checked, onClick, label, ...props }) => {
   return (
     <FormGroup>
       <FormControlLabel
-        control={<Switch defaultChecked />}
-        label="darkmode"
+        control={<Switch checked={checked} />}
+        label={label}
         {...props}
-        onClick={toggleTheme}
+        onClick={onClick}
       />
     </FormGroup>
   );

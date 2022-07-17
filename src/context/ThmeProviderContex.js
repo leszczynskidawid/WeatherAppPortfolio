@@ -8,9 +8,14 @@ const ThemeContext = createContext(null);
 function ProviderContextTheme({ children }) {
   const [theme, setTheme] = useState(false);
 
+  const locastorageTheme = (mode) => {
+    localStorage.setItem("theme", mode);
+  };
+
   const toggleTheme = () => {
     setTheme(!theme);
-    console.log(theme);
+    if (theme) locastorageTheme("ligth");
+    else locastorageTheme("dark");
   };
 
   const value = {
@@ -21,7 +26,11 @@ function ProviderContextTheme({ children }) {
 
   return (
     <ThemeContext.Provider value={value}>
-      <ThemeProvider theme={theme ? lightTheme : darkTheme}>
+      <ThemeProvider
+        theme={
+          localStorage.getItem("theme") === "ligth" ? lightTheme : darkTheme
+        }
+      >
         {children}
       </ThemeProvider>
     </ThemeContext.Provider>

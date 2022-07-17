@@ -1,15 +1,15 @@
 import { AppBar, Typography } from "@mui/material";
 import { ToggleSwitch } from "components/atoms/ToogleSwitch";
-import { StyledToolbar } from "./style";
+import { StyledToolbar, StyledForm } from "./style";
 import CloudSharpIcon from "@mui/icons-material/CloudSharp";
 import { FieldText } from "components/atoms/Input";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
 import { useApiDataTypesMethod } from "const/apiClientMehod";
 import { useWatherContext } from "context/watherDataContext";
+import { useThemeContext } from "context/ThmeProviderContex";
 
 export const Nav = () => {
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset, errors } = useForm({
     defaultValues: {
       search: "",
     },
@@ -18,20 +18,19 @@ export const Nav = () => {
   const { getWeatherByCityNameFromInput } = useApiDataTypesMethod();
   const { setLoader } = useWatherContext();
   const { setWeatherData } = useWatherContext();
+  const { toggleTheme } = useThemeContext();
+
   const onSubmit = async (data) => {
     await setLoader(true);
-    await getWeatherByCityNameFromInput(data.search).then((res) =>
-      setWeatherData(res),
-    );
-    reset();
-    setLoader(false);
+    const res = await getWeatherByCityNameFromInput(data.search);
+
+    if (res) {
+      setWeatherData(res);
+      reset();
+      setLoader(false);
+    }
   };
 
-  const StyldForm = styled.form`
-    margin: 0 10px;
-    width: 100%;
-    align-items: center;
-  `;
   return (
     <AppBar style={{ backgroundColor: "transparent" }} position="sticky">
       <StyledToolbar>
@@ -41,16 +40,20 @@ export const Nav = () => {
         <Typography variant="h6" sx={{ display: { xs: "block", sm: "none" } }}>
           <CloudSharpIcon />
         </Typography>
-        <StyldForm onSubmit={handleSubmit(onSubmit)}>
+        <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <FieldText
             placeholder="search"
             control={control}
             name={"search"}
             type={"text"}
           />
-        </StyldForm>
+        </StyledForm>
 
-        <ToggleSwitch />
+        <ToggleSwitch
+          checked={localStorage.getItem("theme") === "ligth" ? true : false}
+          onClick={toggleTheme}
+          label={localStorage.getItem("theme") === "ligth" ? "ligth" : "dark"}
+        />
       </StyledToolbar>
     </AppBar>
   );
