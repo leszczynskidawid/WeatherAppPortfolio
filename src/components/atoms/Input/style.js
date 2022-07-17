@@ -8,5 +8,5 @@ export const Search = styled.div`
   width: 70%;
 `;
 export const StyledInput = styled(InputBase)`
-  color: white;
+  color: #ffff;
 `;
