@@ -11,7 +11,11 @@ export const GridContainer = styled(Grid)`
 `;
 
 export const StyledIconContainer = styled.div`
-  border: 0.4px solid black;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 10px;
+  border-color: ${(props) => props.theme.text};
+  border: 0.4px solid;
   & img {
     width: 200px;
     height: 200px;
