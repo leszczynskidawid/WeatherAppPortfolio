@@ -5,6 +5,7 @@ import { useApiDataTypesMethod } from "const/apiClientMehod";
 import { useWatherContext } from "context/watherDataContext";
 import { CircularProgressLoader } from "components/atoms/CircularProgressLoader/CircularProgressLoader";
 import { DetailsWeatherCard } from "components/molecules/DetailsWeatherCard/DetailsWeatherCard";
+import { exampleValueGelocationCity } from "const/exampleValueGelocationCity";
 
 const getPosition = () => {
   return new Promise((resolve, rejcet) => {
@@ -15,6 +16,7 @@ const getPosition = () => {
 export const MainPage = () => {
   const { getWeatherByLocationUser } = useApiDataTypesMethod();
   const { weatherData, setWeatherData, loader, setLoader } = useWatherContext();
+  const { lon, lan } = exampleValueGelocationCity.warsaw;
 
   useEffect(() => {
     (async function getWeather() {
@@ -35,9 +37,10 @@ export const MainPage = () => {
         alert(
           "aby korzystać z pogody w miejscu w którym sie znajdujesz zezwól przeglądatce na pobranie Twojej aktualnej lokalizacji ",
         );
-        const rest = await getWeatherByLocationUser(52.5463, 21.0122);
-        setWeatherData(rest);
-        setLoader(false);
+
+        const rest = await getWeatherByLocationUser(lan, lon);
+        await setWeatherData(rest);
+        await setLoader(false);
       }
     })();
   }, []);
