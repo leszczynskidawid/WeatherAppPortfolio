@@ -19,9 +19,15 @@ export const DetailsWeatherCard = ({ data }) => {
           temperature
         </Typography>
         <Stack spacing={2}>
-          <span>min-temp: {data.data?.main.temp_min}</span>
-          <span>max-temp: {data.data?.main.temp_max}</span>
-          <span>odczuwalna: {data.data?.main.feels_like}</span>
+          <span>
+            min-temp: {data.data?.main.temp_min} <sup>o</sup>C
+          </span>
+          <span>
+            max-temp: {data.data?.main.temp_max} <sup>o</sup>C
+          </span>
+          <span>
+            odczuwalna: {data.data?.main.feels_like} <sup>o</sup>C
+          </span>
         </Stack>
       </Grid>
       <Grid item xs={12} md={6}>
@@ -29,8 +35,8 @@ export const DetailsWeatherCard = ({ data }) => {
           <FiberManualRecordIcon /> Inne
         </Typography>
         <Stack spacing={2}>
-          <span>cisnienie:{data.data?.main.pressure}</span>
-          <span>widocznosc: {data.data?.visibility}</span>
+          <span>cisnienie:{data.data?.main.pressure}hpa</span>
+          <span>widocznosc: {data.data?.visibility}%</span>
           <span>zachmurzenie :{data.data?.main.humidity}%</span>
         </Stack>
       </Grid>
@@ -39,8 +45,8 @@ export const DetailsWeatherCard = ({ data }) => {
           <AirIcon /> Wiatr
         </Typography>
         <Stack spacing={2}>
-          <span>predkosc: {data.data?.wind.speed}m/s</span>
-          <span>porywy: {data.data?.wind.gust}m/s </span>
+          <span>predkosc: {data.data?.wind.speed} km/h</span>
+          <span>porywy: {data.data?.wind.gust} km/h </span>
         </Stack>
       </Grid>
       <Grid item xs={12} md={6}>

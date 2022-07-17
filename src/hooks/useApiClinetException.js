@@ -9,14 +9,12 @@ export const useApiClientException = () => {
     switch (status) {
       case "404":
         return navigate(routePathTypes.noMatch, { state: errorMessage });
-
       case "400":
         return navigate(routePathTypes.noMatch, { state: errorMessage });
       case "401":
         return navigate(routePathTypes.noMatch, { state: errorMessage });
       case "ERR_NETWORK":
         return navigate(routePathTypes.noMatch, { state: errorMessage });
-
       default:
         return navigate(routePathTypes.noMatch, { state: errorMessage });
     }
