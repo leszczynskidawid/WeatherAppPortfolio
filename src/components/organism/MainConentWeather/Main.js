@@ -4,7 +4,7 @@ import { WeatherInfoCard } from "components/molecules/WeatherInfoCard/WeatherInf
 import { useApiDataTypesMethod } from "const/apiClientMehod";
 import { useWatherContext } from "context/watherDataContext";
 import { CircularProgressLoader } from "components/atoms/CircularProgressLoader/CircularProgressLoader";
-import { DetailsWeatherCard } from "components/organism/DetailsWeatherCard";
+import { DetailsWeatherCard } from "components/molecules/DetailsWeatherCard/DetailsWeatherCard";
 
 const getPosition = () => {
   return new Promise((resolve, rejcet) => {
@@ -18,8 +18,9 @@ export const MainPage = () => {
 
   useEffect(() => {
     (async function getWeather() {
+      setLoader(true);
+
       try {
-        setLoader(true);
         const posi = await getPosition();
         const res = await getWeatherByLocationUser(
           posi.coords.latitude,
@@ -31,7 +32,12 @@ export const MainPage = () => {
           setLoader(false);
         }
       } catch (error) {
-        console.log(error);
+        alert(
+          "aby korzystać z pogody w miejscu w którym sie znajdujesz zezwól przeglądatce na pobranie Twojej aktualnej lokalizacji ",
+        );
+        const rest = await getWeatherByLocationUser(52.5463, 21.0122);
+        setWeatherData(rest);
+        setLoader(false);
       }
     })();
   }, []);

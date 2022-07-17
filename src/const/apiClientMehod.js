@@ -8,6 +8,7 @@ export const useApiDataTypesMethod = () => {
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pl`,
+        { timeout: 5000 },
       );
 
       return response;
@@ -19,9 +20,11 @@ export const useApiDataTypesMethod = () => {
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${valueCityName}&appid=${apiKey}&units=metric&lang=pl`,
+        { timeout: 5000 },
       );
       return response;
     } catch (error) {
+      console.log(error);
       return handleApiClientException(error);
     }
   };

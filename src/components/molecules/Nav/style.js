@@ -7,6 +7,10 @@ export const StyledToolbar = styled(Toolbar)`
   background: rgba(126, 119, 119, 0.9);
   backdrop-filter: blur(20px);
   color: black;
-
   border: 1px solid rgba(255, 255, 255, 0.18);
+`;
+export const StyledForm = styled.form`
+  margin: 0 10px;
+  width: 100%;
+  align-items: center;
 `;
